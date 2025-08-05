@@ -36,7 +36,7 @@ class BookController {
         $payload = json_decode(file_get_contents('php://input'), true);
 
         if ($method === 'POST') {
-            $author = $this->authorRepository->findById((int)$payload['id'] ?? 0);
+            $author = $this->authorRepository->findById((int)$payload['author_id'] ?? 0);
             if (!$author) {
                 http_response_code(400);
                 echo json_encode(['error' => 'Author not found']);

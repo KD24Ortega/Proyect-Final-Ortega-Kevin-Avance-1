@@ -10,11 +10,9 @@ BEGIN
         b.genre,
         b.edition,
         b.publication_id,
-
         p.description,
         p.publication_date,
         p.title,
-
         -- Ahora incluimos TODOS los campos del author que tu hydrate() necesita:
         a.id         AS id,
         a.first_name,
