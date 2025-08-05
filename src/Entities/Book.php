@@ -11,7 +11,7 @@ class Book extends Publication
     private int $edition;
 
     public function __construct(
-        int $id,
+        ?int $id,
         string $title,
         string $description,
         \DateTime $publicationDate,

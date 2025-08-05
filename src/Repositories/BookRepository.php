@@ -35,7 +35,7 @@ class BookRepository implements RepositoryInterface{
             [
                 "title" => $entity->getTitle(),
                 "description" => $entity->getDescription(),
-                "publication_date" => $entity->getPublicationDate(),
+                "publication_date" => $entity->getPublicationDate()->format('Y-m-d'),
                 "author_id" => $entity->getAuthor()->getId(),
                 "isbn" => $entity->getIsbn(),
                 "genre" => $entity->getGenre(),
@@ -77,7 +77,7 @@ class BookRepository implements RepositoryInterface{
                 "id" => $entity->getId(),
                 "title" => $entity->getTitle(),
                 "description" => $entity->getDescription(),
-                "publication_date" => $entity->getPublicationDate(),
+                "publication_date" => $entity->getPublicationDate()->format('Y-m-d'),
                 "author_id" => $entity->getAuthor()->getId(),
                 "isbn" => $entity->getIsbn(),
                 "genre" => $entity->getGenre(),

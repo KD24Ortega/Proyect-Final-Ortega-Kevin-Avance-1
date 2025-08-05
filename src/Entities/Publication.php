@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace App\Entities;
 
 abstract class Publication {
-    protected int $id;
+    protected ?int $id;
     protected string $title;
     protected string $description;
     protected \DateTime $publicationDate;
     protected Author $author;
 
     public function __construct(
-        int $id,
+        ?int $id,
         string $title,
         string $description,
         \DateTime $publicationDate,
@@ -24,7 +24,7 @@ abstract class Publication {
         $this->author = $author;
     }
 
-    public function getId(): int {
+    public function getId(): ?int {
         return $this->id;
     }
 

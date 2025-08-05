@@ -34,7 +34,7 @@ class AuthorController {
 
         if ($method === 'POST') {
             $author = new Author(
-                null,
+                0,
                 $payload['first_name'],
                 $payload['last_name'],
                 $payload['username'],

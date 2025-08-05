@@ -56,6 +56,43 @@ class BookController {
             echo json_encode(['success' => $this->bookRepository->create($book)]);
             return;
         }
+
+        if ($method === 'PUT') {
+            $id = (int)($payload['id'] ?? 0);
+            $existing = $this->bookRepository->findById($id);
+            if (!$existing) {
+                http_response_code(404);
+                echo json_encode(['error' => 'Book not found']);
+                return;
+            }
+            if (isset($payload['author_id'])) {
+                $author = $this->authorRepository->findById((int)$payload['author_id']);
+                if ($author) $existing->setAuthor($author);
+            }
+            if (isset($payload['title'])) $existing->setTitle($payload['title']);
+            if (isset($payload['description'])) $existing->setDescription($payload['description']);
+            if (isset($payload['publication_date'])) {
+                $existing->setPublicationDate(new \DateTime($payload['publication_date']));
+            }
+
+            if (isset($payload['isbn'])) $existing->setIsbn($payload['isbn']);
+            if (isset($payload['genre'])) $existing->setGenre($payload['genre']);
+            if (isset($payload['edition'])) $existing->setEdition((int)$payload['edition']);
+
+            echo json_encode(['success' => $this->bookRepository->update($existing)]);
+            return;
+        }
+
+        if ($method === 'DELETE') {
+            $payload = json_decode(file_get_contents('php://input'), true);
+            $id = (int)($payload['id'] ?? 0);
+            $ok = $this->bookRepository->delete($id);
+            echo json_encode(['success' => $ok]);
+            return;
+        }
+
+        http_response_code(405);
+        echo json_encode(['error' => 'Method not allowed']);
     }
 
     public function bookToArray(Book $book): array {
