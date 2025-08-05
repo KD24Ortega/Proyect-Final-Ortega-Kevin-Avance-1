@@ -131,7 +131,7 @@ class ArticleRepository implements RepositoryInterface {
 
 
         return new Article(
-            (int)$row['publication_id'],
+            $articleId,
             $row['title'],
             $row['description'],
             new \DateTime($row['publication_date']),
